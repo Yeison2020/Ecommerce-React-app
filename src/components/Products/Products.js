@@ -1,6 +1,7 @@
 import React from "react";
 import { Grid } from "@material-ui/core";
 import Product from "../Product/Product";
+import useStyles from "./styles";
 const product = [
   {
     id: 1,
@@ -18,10 +19,12 @@ const product = [
     image: "https://www.notebookcheck.net/uploads/tx_nbc2/air13teaser.jpg",
   },
 ];
-
+// Need to review how Each classes affect my layout
 const Products = () => {
+  const classes = useStyles();
   return (
-    <main>
+    <main className={classes.content}>
+      <div className={classes.toolbar} />
       <Grid container justify="center" spacing={4}>
         {product.map((product) => {
           return (
