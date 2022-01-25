@@ -36,7 +36,7 @@ const CartItem = ({ item }) => {
         <Button
           variante="contained"
           type="button"
-          color="secundary"
+          color="secondary"
           className={classes.colorCustom}
         >
           Remove

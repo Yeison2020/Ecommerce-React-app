@@ -4,6 +4,7 @@ import NavBar from "./components/NavBar/NavBar";
 import { commerce } from "./lib/commerce";
 import { useState, useEffect } from "react";
 import Cart from "./components/Cart/Cart";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 function App() {
   const [products, setProducts] = useState([]);
@@ -30,11 +31,20 @@ function App() {
 
   console.log(cart);
   return (
-    <div>
-      <NavBar totalItems={cart.total_items} />
-      {/* <Products product={products} handleAddToCart={handleAddToCart} /> */}
-      <Cart cart={cart} />
-    </div>
+    <Router>
+      <div>
+        <NavBar totalItems={cart.total_items} />
+        <Routes>
+          <Route path="/cart" element={<Cart cart={cart} />} />
+          <Route
+            path="/"
+            element={
+              <Products product={products} handleAddToCart={handleAddToCart} />
+            }
+          />
+        </Routes>
+      </div>
+    </Router>
   );
 }
 

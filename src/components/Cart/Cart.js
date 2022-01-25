@@ -2,6 +2,7 @@ import React from "react";
 import { Container, Typography, Button, Grid } from "@material-ui/core";
 import useStyles from "./styles";
 import CartItem from "./CartItem/CartItem";
+import { NavLink } from "react-router-dom";
 
 const Cart = ({ cart }) => {
   console.log(cart);
@@ -12,7 +13,10 @@ const Cart = ({ cart }) => {
   const EmptyCart = () => {
     return (
       <Typography variant="subtitle1">
-        You have not Items in yoour shopping cart start adding some!
+        You have not Items in yoour shopping cart start adding some!,
+        <NavLink to="/" exact="true" end={true} className={classes.link}>
+          Start adding some Items
+        </NavLink>
       </Typography>
     );
   };
