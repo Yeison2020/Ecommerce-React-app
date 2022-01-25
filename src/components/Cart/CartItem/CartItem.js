@@ -8,7 +8,8 @@ import {
   CardContent,
 } from "@material-ui/core";
 import useStyles from "./styles";
-const CartItem = ({ item }) => {
+const CartItem = ({ item, handleRemoveFromCart, handleUpdateCartQuantity }) => {
+  console.log(item);
   const classes = useStyles();
   return (
     <Card>
@@ -25,11 +26,22 @@ const CartItem = ({ item }) => {
       </CardContent>
       <CardActions className={classes.CardActions}>
         <div className={classes.buttons}>
-          <Button type="button" size="small">
+          <Button
+            type="button"
+            size="small"
+            onClick={() => {
+              const quantity = item.quantity - 1;
+              handleUpdateCartQuantity(item.id, quantity);
+            }}
+          >
             -
           </Button>
           <Typography>{item.quantity}</Typography>
-          <Button type="button" size="small">
+          <Button
+            type="button"
+            size="small"
+            onClick={() => handleUpdateCartQuantity(item.id, item.quantity + 1)}
+          >
             +
           </Button>
         </div>
@@ -38,6 +50,7 @@ const CartItem = ({ item }) => {
           type="button"
           color="secondary"
           className={classes.colorCustom}
+          onClick={() => handleRemoveFromCart(item.id)}
         >
           Remove
         </Button>

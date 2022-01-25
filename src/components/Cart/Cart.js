@@ -4,9 +4,12 @@ import useStyles from "./styles";
 import CartItem from "./CartItem/CartItem";
 import { NavLink } from "react-router-dom";
 
-const Cart = ({ cart }) => {
-  console.log(cart);
-
+const Cart = ({
+  cart,
+  handleUpdateCartQuantity,
+  handleEmptyCart,
+  handleRemoveFromCart,
+}) => {
   // Here If the cart is not empty meaing the value is not falsy The cart will be false, because is not empty base on the Boolean
 
   const classes = useStyles();
@@ -28,7 +31,11 @@ const Cart = ({ cart }) => {
           {cart.line_items?.map((item) => {
             return (
               <Grid item xs={12} sm={4} key={item.id}>
-                <CartItem item={item} />
+                <CartItem
+                  item={item}
+                  handleUpdateCartQuantity={handleUpdateCartQuantity}
+                  handleRemoveFromCart={handleRemoveFromCart}
+                />
               </Grid>
             );
           })}
@@ -44,6 +51,7 @@ const Cart = ({ cart }) => {
               type="button"
               variant="contained"
               color="secondary"
+              onClick={handleEmptyCart}
             >
               Empty Cart
             </Button>
