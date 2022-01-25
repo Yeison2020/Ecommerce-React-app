@@ -17,10 +17,12 @@ function App() {
   }, []);
 
   console.log(products);
+
+  console.log(products);
   return (
     <div>
       <NavBar />
-      <Products />
+      <Products product={products} />
     </div>
   );
 }
