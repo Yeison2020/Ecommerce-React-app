@@ -5,6 +5,7 @@ import { commerce } from "./lib/commerce";
 import { useState, useEffect } from "react";
 import Cart from "./components/Cart/Cart";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import CheckOut from "./components/CheckoutForm/Checkout/CheckOut";
 
 function App() {
   const [products, setProducts] = useState([]);
@@ -70,6 +71,7 @@ function App() {
               <Products product={products} handleAddToCart={handleAddToCart} />
             }
           />
+          <Route path="/checkout" element={<CheckOut />} />
         </Routes>
       </div>
     </Router>

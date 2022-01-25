@@ -16,7 +16,7 @@ const Cart = ({
   const EmptyCart = () => {
     return (
       <Typography variant="subtitle1">
-        You have not Items in yoour shopping cart start adding some!,
+        You have not Items in yoour shopping cart start adding some!, &nbsp;
         <NavLink to="/" exact="true" end={true} className={classes.link}>
           Start adding some Items
         </NavLink>
@@ -61,6 +61,8 @@ const Cart = ({
               type="button"
               variant="contained"
               color="primary"
+              component={NavLink}
+              to="/checkout"
             >
               Check Out
             </Button>
