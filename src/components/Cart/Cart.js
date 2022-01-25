@@ -2,8 +2,12 @@ import React from "react";
 import { Container, Typography, Button, Grid } from "@material-ui/core";
 import useStyles from "./styles";
 
-const Cart = () => {
-  const isEmpty = true;
+const Cart = ({ cart }) => {
+  console.log(cart);
+
+  // Here If the cart is not empty meaing the value is not falsy The cart will be false, because is not empty base on the Boolean
+  const isEmpty = !cart.line_items?.length;
+  console.log(isEmpty);
   const classes = useStyles();
   const EmptyCart = () => {
     return (
