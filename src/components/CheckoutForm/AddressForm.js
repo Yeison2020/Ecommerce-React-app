@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   InputLabel,
   Select,
@@ -10,7 +10,7 @@ import {
 import FormInput from "./ FormInput";
 import { useForm, FormProvider } from "react-hook-form";
 import { commerce } from "../../lib/commerce";
-const AddressForm = () => {
+const AddressForm = ({ checkoutToken }) => {
   const methods = useForm();
   const [shippingCountries, setShippingCountries] = useState([]);
   const [shippingCountry, setShippingCountry] = useState("");
@@ -23,12 +23,49 @@ const AddressForm = () => {
 
   // Functions to fecth using Commerce api
 
+  const countries = Object.entries(shippingCountries).map(([code, name]) => ({
+    id: code,
+    label: name,
+  }));
+
+  const subdivicions = Object.entries(shippingSubdivisions).map(
+    ([code, name]) => ({
+      id: code,
+      label: name,
+    })
+  );
+
+  console.log(subdivicions);
+  // Functions to fecth Countries data
+
   const fetchShippingCountries = async (checkoutTokenId) => {
     const { countries } = await commerce.services.localeListShippingCountries(
       checkoutTokenId
     );
+    console.log(countries);
     setShippingCountries(countries);
+    setShippingCountry(Object.keys(countries)[0]);
   };
+
+  const fetchShippingSubdivision = async (countryCode) => {
+    const { subdivisions } =
+      await commerce.services.localeListShippingSubdivisions(countryCode);
+
+    setShippingSubdivisions(subdivisions);
+    setShippingSubdivision(Object.keys(subdivisions)[0]);
+  };
+
+  // Handling fetch for Countries data
+
+  // 1 Needs to happend First
+  useEffect(() => {
+    fetchShippingCountries(checkoutToken.id);
+  }, []);
+
+  // 2 Need to happend after I get my country to get subdivision
+  useEffect(() => {
+    if (shippingCountry) fetchShippingSubdivision(shippingCountry);
+  }, [shippingCountry]);
 
   return (
     <>
@@ -44,15 +81,35 @@ const AddressForm = () => {
             <FormInput required name="email" label="Email" />
             <FormInput required name="city" label="City" />
             <FormInput required name="zip" label="ZIP / Postal code" />
-            {/* <Grid item xs={12} sm={6}>
+            <Grid item xs={12} sm={6}>
               <InputLabel>Shipping Country</InputLabel>
-              <Select value={0} fullWidth onChange={}>
-              <MenuItem key={} value={}>
-              Select Me
-              </MenuItem>
+              <Select
+                value={shippingCountry}
+                fullWidth
+                onChange={(e) => setShippingCountry(e.target.value)}
+              >
+                {countries.map((country) => (
+                  <MenuItem key={country.id} value={country.id}>
+                    {country.label}
+                  </MenuItem>
+                ))}
               </Select>
             </Grid>
             <Grid item xs={12} sm={6}>
+              <InputLabel>Shipping Subdivision</InputLabel>
+              <Select
+                value={shippingSubdivision}
+                fullWidth
+                onChange={(e) => setShippingSubdivision(e.target.value)}
+              >
+                {subdivicions.map((subdivicions) => (
+                  <MenuItem key={subdivicions.id} value={subdivicions.id}>
+                    {subdivicions.label}
+                  </MenuItem>
+                ))}
+              </Select>
+            </Grid>
+            {/*  <Grid item xs={12} sm={6}>
             <InputLabel>Shipping Country</InputLabel>
             <Select value={0} fullWidth onChange={}>
             <MenuItem key={} value={}>
@@ -60,14 +117,7 @@ const AddressForm = () => {
             </MenuItem>
             </Select>
           </Grid>
-          <Grid item xs={12} sm={6}>
-          <InputLabel>Shipping Subdivision</InputLabel>
-          <Select value={0} fullWidth onChange={}>
-          <MenuItem key={} value={}>
-          Select Me
-          </MenuItem>
-          </Select>
-        </Grid>
+      
         <Grid item xs={12} sm={6}>
         <InputLabel>Shipping Options</InputLabel>
         <Select value={0} fullWidth onChange={}>
@@ -75,8 +125,7 @@ const AddressForm = () => {
         Select Me
         </MenuItem>
         </Select>
-      </Grid>
-         */}
+      </Grid> */}
           </Grid>
         </form>
       </FormProvider>
