@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import {
   InputLabel,
   Select,
@@ -104,7 +105,7 @@ const AddressForm = ({ checkoutToken }) => {
       <FormProvider {...methods}>
         <form onSubmit="">
           <Grid container spacing={3}>
-            <FormInput required name="firstname" label="first name" />
+            <FormInput required name="firstname" label="First name" />
             <FormInput required name="lastname" label="Last name" />
             <FormInput required name="address1" label="Address" />
             <FormInput required name="email" label="Email" />
@@ -154,6 +155,15 @@ const AddressForm = ({ checkoutToken }) => {
               </Select>
             </Grid>
           </Grid>
+          <br />
+          <div style={{ display: "flex", justifyContent: "space-between" }}>
+            <Button component={Link} variant="outlined" to="/cart">
+              Back to Cart
+            </Button>
+            <Button type="submit" variant="contained" color="primary">
+              Next
+            </Button>
+          </div>
         </form>
       </FormProvider>
     </>
