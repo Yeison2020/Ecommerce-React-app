@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Paper,
   Stepper,
@@ -12,11 +12,26 @@ import {
 import useStyle from "./styles";
 import AddressForm from "../AddressForm";
 import PaymentForm from "../PaymentForm";
+import { commerce } from "../../../lib/commerce";
 
-const CheckOut = () => {
+const CheckOut = ({ cart }) => {
   const [activeStep, setActiveStep] = useState(0);
   const steps = ["Shipping address", "Payment details"];
   const classes = useStyle();
+  const [checkoutToken, setCheckoutToken] = useState(null);
+
+  useEffect(() => {
+    const generateToken = async () => {
+      try {
+        const token = await commerce.checkout.generateToken(cart.id, {
+          type: "cart",
+        });
+        setCheckoutToken(token);
+        console.log(token);
+      } catch (error) {}
+    };
+    generateToken();
+  }, []);
 
   const Confirmation = () => {
     return <div>Confimation</div>;

@@ -1,4 +1,4 @@
-import React , {useState}from "react";
+import React, { useState } from "react";
 import {
   InputLabel,
   Select,
@@ -9,19 +9,27 @@ import {
 } from "@material-ui/core";
 import FormInput from "./ FormInput";
 import { useForm, FormProvider } from "react-hook-form";
+import { commerce } from "../../lib/commerce";
 const AddressForm = () => {
   const methods = useForm();
   const [shippingCountries, setShippingCountries] = useState([]);
-  const [shippingCountry, setShippingCountry] = useState('');
-//
+  const [shippingCountry, setShippingCountry] = useState("");
+  //
   const [shippingSubdivisions, setShippingSubdivisions] = useState([]);
-  const [shippingSubdivision, setShippingSubdivision] = useState('');
-
-
+  const [shippingSubdivision, setShippingSubdivision] = useState("");
   //
   const [shippingOptions, setShippingOptions] = useState([]);
-  const [shippingOptions, setShippingOptions] = useState('');
- 
+  const [shippingOption, setShippingOption] = useState("");
+
+  // Functions to fecth using Commerce api
+
+  const fetchShippingCountries = async (checkoutTokenId) => {
+    const { countries } = await commerce.services.localeListShippingCountries(
+      checkoutTokenId
+    );
+    setShippingCountries(countries);
+  };
+
   return (
     <>
       <Typography variant="h6" gutterBottom>
@@ -36,7 +44,7 @@ const AddressForm = () => {
             <FormInput required name="email" label="Email" />
             <FormInput required name="city" label="City" />
             <FormInput required name="zip" label="ZIP / Postal code" />
-            <Grid item xs={12} sm={6}>
+            {/* <Grid item xs={12} sm={6}>
               <InputLabel>Shipping Country</InputLabel>
               <Select value={0} fullWidth onChange={}>
               <MenuItem key={} value={}>
@@ -68,6 +76,7 @@ const AddressForm = () => {
         </MenuItem>
         </Select>
       </Grid>
+         */}
           </Grid>
         </form>
       </FormProvider>

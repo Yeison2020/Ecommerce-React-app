@@ -71,7 +71,7 @@ function App() {
               <Products product={products} handleAddToCart={handleAddToCart} />
             }
           />
-          <Route path="/checkout" element={<CheckOut />} />
+          <Route path="/checkout" element={<CheckOut cart={cart} />} />
         </Routes>
       </div>
     </Router>
