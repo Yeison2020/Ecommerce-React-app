@@ -11,7 +11,7 @@ import {
 import FormInput from "./ FormInput";
 import { useForm, FormProvider } from "react-hook-form";
 import { commerce } from "../../lib/commerce";
-const AddressForm = ({ checkoutToken, next }) => {
+const AddressForm = ({ checkoutToken, next, nextStep, backStep }) => {
   const methods = useForm();
   const [shippingCountries, setShippingCountries] = useState([]);
   const [shippingCountry, setShippingCountry] = useState("");
@@ -166,10 +166,20 @@ const AddressForm = ({ checkoutToken, next }) => {
           </Grid>
           <br />
           <div style={{ display: "flex", justifyContent: "space-between" }}>
-            <Button component={Link} variant="outlined" to="/cart">
+            <Button
+              component={Link}
+              variant="outlined"
+              to="/cart"
+              onClick={backStep}
+            >
               Back to Cart
             </Button>
-            <Button type="submit" variant="contained" color="primary">
+            <Button
+              type="submit"
+              variant="contained"
+              color="primary"
+              onClick={nextStep}
+            >
               Next
             </Button>
           </div>
