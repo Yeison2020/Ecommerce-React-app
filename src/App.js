@@ -10,7 +10,8 @@ import CheckOut from "./components/CheckoutForm/Checkout/CheckOut";
 function App() {
   const [products, setProducts] = useState([]);
   const [cart, setCart] = useState([]);
-
+  const [order, setOrder] = useState({});
+  const [errorMessage, setErrorMessage] = useState("");
   const fetchProducts = async () => {
     const { data } = await commerce.products.list();
     setProducts(data);
@@ -37,6 +38,23 @@ function App() {
     setCart(cart);
   };
 
+  const refresCart = async () => {
+    const newCart = await commerce.cart.refresh();
+    setCart(newCart);
+  };
+  const handleCaptureCheckOut = async (checkoutTokenId, newOrder) => {
+    try {
+      const incomingOrder = await commerce.checkout.capture(
+        checkoutTokenId,
+        newOrder
+      );
+
+      setOrder(incomingOrder);
+      refresCart();
+    } catch (error) {
+      setErrorMessage(error.data.error.message);
+    }
+  };
   const handleAddToCart = async (productId, quantity) => {
     const item = await commerce.cart.add(productId, quantity);
     setCart(item.cart);
@@ -71,7 +89,17 @@ function App() {
               <Products product={products} handleAddToCart={handleAddToCart} />
             }
           />
-          <Route path="/checkout" element={<CheckOut cart={cart} />} />
+          <Route
+            path="/checkout"
+            element={
+              <CheckOut
+                cart={cart}
+                order={order}
+                onCaptureCheckout={handleCaptureCheckOut}
+                error={errorMessage}
+              />
+            }
+          />
         </Routes>
       </div>
     </Router>
