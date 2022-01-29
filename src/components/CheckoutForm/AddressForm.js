@@ -11,7 +11,7 @@ import {
 import FormInput from "./ FormInput";
 import { useForm, FormProvider } from "react-hook-form";
 import { commerce } from "../../lib/commerce";
-const AddressForm = ({ checkoutToken }) => {
+const AddressForm = ({ checkoutToken, next }) => {
   const methods = useForm();
   const [shippingCountries, setShippingCountries] = useState([]);
   const [shippingCountry, setShippingCountry] = useState("");
@@ -103,7 +103,16 @@ const AddressForm = ({ checkoutToken }) => {
         Shipping Address
       </Typography>
       <FormProvider {...methods}>
-        <form onSubmit="">
+        <form
+          onSubmit={methods.handleSubmit((data) =>
+            next({
+              ...data,
+              shippingCountry,
+              shippingOption,
+              shippingSubdivision,
+            })
+          )}
+        >
           <Grid container spacing={3}>
             <FormInput required name="firstname" label="First name" />
             <FormInput required name="lastname" label="Last name" />
