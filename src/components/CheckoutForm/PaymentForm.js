@@ -18,12 +18,13 @@ function PaymentForm({
   const handleSubmit = async (e, elements, stripe) => {
     e.preventDefault();
     if (!stripe || !elements) return;
-    const cart = elements.getElement(CardElement);
+
+    const cardElement = elements.getElement(CardElement);
+
     const { error, paymentMethod } = await stripe.createPaymentMethod({
       type: "card",
-      card: CardElement,
+      card: cardElement,
     });
-
     if (error) {
       console.log(error);
     } else {
