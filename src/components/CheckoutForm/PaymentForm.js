@@ -35,13 +35,15 @@ function PaymentForm({
           lastname: shippingData.lastname,
           email: shippingData.email,
         },
-        shipping: {
-          name: "Primary",
-          street: shippingData.address1,
-          town_city: shippingData.city,
-          county_state: shippingData.shippingSubdivision,
-          postal_zip_code: shippingData.zip,
-          country: shippingData.shippingCountry,
+        billing_details: {
+          address: {
+            city: shippingData.city,
+            country: shippingData.shippingCountry,
+            line1: shippingData.address1,
+            lin21: shippingData.address2,
+            postal_code: shippingData.zip,
+            state: shippingData.shippingSubdivision,
+          },
         },
         fulfillment: {
           shipping_method: shippingData.shippingOption,
