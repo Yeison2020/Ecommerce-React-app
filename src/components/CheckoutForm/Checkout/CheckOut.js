@@ -13,6 +13,7 @@ import useStyle from "./styles";
 import AddressForm from "../AddressForm";
 import PaymentForm from "../PaymentForm";
 import { commerce } from "../../../lib/commerce";
+import { Link } from "react-router-dom";
 
 const CheckOut = ({ cart, order, onCaptureCheckout, error }) => {
   const [shippingData, setShippingData] = useState({});
@@ -34,10 +35,41 @@ const CheckOut = ({ cart, order, onCaptureCheckout, error }) => {
     generateToken();
   }, [cart]);
 
-  const Confirmation = () => {
-    return <div>Confimation</div>;
-  };
+  const firstname = "Yeison";
+  const lastname = "Casado";
 
+  let Confirmation = () =>
+    order.customer ? (
+      <>
+        <div>
+          <Typography variant="h5">
+            Thank your for your purchase, `${order.customer.firstname} $
+            {order.customer.lastname}`
+          </Typography>
+          <Divider className={classes.divider} />
+          <Typography variant="subtitle2">
+            Order ref: `${order.customer.reference}`
+          </Typography>
+        </div>
+        <br />
+        <Button variant="outlined" type="button" componet={Link} to="/">
+          Back to Home
+        </Button>
+      </>
+    ) : (
+      <div className={classes.spinner}>
+        <CircularProgress />
+      </div>
+    );
+  if (error) {
+    <>
+      <Typography variant="h5">`Error ${error}`</Typography>
+      <br />
+      <Button variant="outlined" type="button" componet={Link} to="/">
+        Back to Home
+      </Button>
+    </>;
+  }
   const nextStep = () => setActiveStep((before) => before + 1);
   const backStep = () => setActiveStep((before) => before - 1);
 

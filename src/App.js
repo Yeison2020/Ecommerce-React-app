@@ -66,8 +66,8 @@ function App() {
     fecthCart();
   }, []);
 
-  console.log(products);
-
+  console.log(errorMessage);
+  console.log(order);
   console.log(cart);
   return (
     <Router>
