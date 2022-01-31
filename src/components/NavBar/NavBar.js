@@ -34,7 +34,6 @@ const NavBar = ({ totalItems }) => {
               height="25px"
               className={classes.image}
             />
-            Ecommerce DR
           </Typography>
           <div className={classes.grow} />
 
