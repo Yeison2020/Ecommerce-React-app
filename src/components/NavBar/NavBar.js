@@ -10,7 +10,7 @@ import {
 } from "@material-ui/core";
 import { ShoppingCart } from "@material-ui/icons";
 import useStyles from "./styles";
-import logo from "../../assets/Logo-two.png";
+import logo from "../../assets/Pinpoint-Color.svg";
 import { NavLink, useLocation } from "react-router-dom";
 
 const NavBar = ({ totalItems }) => {
@@ -34,7 +34,7 @@ const NavBar = ({ totalItems }) => {
               height="25px"
               className={classes.image}
             />
-            Ecommerce React App
+            Ecommerce DR
           </Typography>
           <div className={classes.grow} />
 

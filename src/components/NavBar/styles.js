@@ -4,6 +4,7 @@ const drawerWidth = 0;
 
 export default makeStyles((theme) => ({
   appBar: {
+    backgroundColor: "#D3DEDC",
     boxShadow: "none",
     borderBottom: "1px solid rgba(0, 0, 0, 0.12)",
     [theme.breakpoints.up("sm")]: {
@@ -19,6 +20,7 @@ export default makeStyles((theme) => ({
   },
   image: {
     marginRight: "10px",
+    height: "60px",
   },
   menuButton: {
     marginRight: theme.spacing(2),
