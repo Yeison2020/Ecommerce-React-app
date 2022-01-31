@@ -1,9 +1,5 @@
 {
   "name": "ecommerce-react-app",
-  "description": "Build scripts for Heroku",
-  "engines": {
-    "node": "16.7.0"
-  },
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -26,8 +22,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "heroku-postbuild": "npm run clean && npm run build && npm run deploy"
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": [
