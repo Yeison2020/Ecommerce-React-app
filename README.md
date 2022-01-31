@@ -1,8 +1,15 @@
-# Getting Started with Create React App
+# Ecommerce React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Project description
 
-## Available Scripts
+Ecommcer app created with Reactjs as its primary frontend framework. The backend is powered by Ecommerce.js.
+
+## Why you used the technologies you used ?
+
+- React is used for the front end.
+- Material UI is used for styling.
+- The backend is powered by Ecommerce.js.
+- Heroku was used as a hosting platform.
 
 In the project directory, you can run:
 
@@ -68,4 +75,5 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
 # Ecommerce-React-app
